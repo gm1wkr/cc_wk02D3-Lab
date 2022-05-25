@@ -33,7 +33,6 @@ class TestFood(unittest.TestCase):
 
     def test_buy_food__no_cash(self):        
         self.chips.buy_food(self.customer_poor, self.pub)
-        # self.customer_poor.drunk_level = 20
         self.chips.buy_food(self.customer_poor, self.pub)
 
         self.assertEqual(1, self.customer_poor.wallet)

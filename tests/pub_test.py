@@ -39,3 +39,4 @@ class TestPub(unittest.TestCase):
         old_enough = self.pub.check_customer_age(self.customer_young.age)
         self.assertEqual(False, old_enough)
 
+# Extensions
