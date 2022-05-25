@@ -1,2 +1,5 @@
 CLASS NOTES
 https://github.com/codeclan/sr10_classnotes/blob/main/week_02/day_3/testing_lab/testing_lab.md
+
+REPO Link (Lab work)
+https://github.com/gm1wkr/cc_wk02D3-Lab
