@@ -56,6 +56,12 @@ class TestPub(unittest.TestCase):
         self.assertEqual(0, self.pub.stock["Pan_Galactic_Gargle_Blaster"])
   
 
+    def test_get_stock(self):
+        self.pub.reduce_stock(self.drink)
+        self.assertEqual(99, self.pub.stock["Whiskey"])
+        self.assertEqual(200, self.pub.stock["Beer"])
+        self.assertEqual(150, self.pub.stock["Gin"])
+
     def test_sell_drink__okay(self):
         self.pub.till = 100
         self.assertEqual(100, self.pub.till)

@@ -30,20 +30,14 @@ class Pub:
             self.stock[drink.name] -= 1
     
     def sell_drink(self, customer, drink):
-        # check customer age
         if not self.check_customer_age(customer.age):
             return
 
-        # check not too drunk
         if self.is_customer_too_drunk(customer):
             return
 
-        # take money from customer if available
-        customer.decrease_wallet(drink.price)
-        
-        # put money in till
-        self.increase_till(drink.price)
 
-        # reduce stock count
+        customer.decrease_wallet(drink.price)
+        self.increase_till(drink.price)
         self.reduce_stock(drink)
         
