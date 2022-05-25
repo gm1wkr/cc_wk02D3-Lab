@@ -8,7 +8,8 @@ class Pub:
         self.stock = {
             "Whiskey" : 100,
             "Gin": 150,
-            "Beer": 200
+            "Beer": 200,
+            "Pan_Galactic_Gargle_Blaster": 0
         }
 
     def increase_till(self, amount):
@@ -21,15 +22,21 @@ class Pub:
     def is_customer_too_drunk(self, customer):
         return self.refuses_drink <= customer.drunk_level
 
-    def reduce_stock(self,drink):
-        self.stock[drink.name] -= 1
+    def is_in_stock(self, drink):
+        return drink.name in self.stock
+
+    def reduce_stock(self, drink):
+        if self.is_in_stock(drink) and self.stock[drink.name] >= 1:
+            self.stock[drink.name] -= 1
     
     def sell_drink(self, customer, drink):
         # check customer age
-        self.check_customer_age(customer.age)
+        if not self.check_customer_age(customer.age):
+            return
 
         # check not too drunk
-        self.is_customer_too_drunk(customer)
+        if self.is_customer_too_drunk(customer):
+            return
 
         # take money from customer if available
         customer.decrease_wallet(drink.price)
@@ -38,5 +45,5 @@ class Pub:
         self.increase_till(drink.price)
 
         # reduce stock count
-
-        pass
+        self.reduce_stock(drink)
+        

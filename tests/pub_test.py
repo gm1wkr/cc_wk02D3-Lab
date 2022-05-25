@@ -9,7 +9,8 @@ class TestPub(unittest.TestCase):
     def setUp(self):
         self.pub = Pub("The Prancing Pony", 100)
         self.drink = Drink("Whiskey", 10)
-        self.customer = Customer("Bob", 100, 19)
+        self.drink_not_found = Drink("Pan_Galactic_Gargle_Blaster", 90)
+        self.customer = Customer("Zaphod Beeblebrox", 100, 19)
         self.customer_young = Customer("Jane", 100, 17)
 
 
@@ -43,15 +44,30 @@ class TestPub(unittest.TestCase):
     def test_pub_has_stock_dict(self):
         self.assertEqual(isinstance(self.pub.stock, dict), True)
 
-    def test_reduce_stock(self):
+    def test_is_in_stock__true(self):
+        self.assertEqual(True, self.pub.is_in_stock(self.drink))
+
+    def test_reduce_stock__has_stock(self):
         self.pub.reduce_stock(self.drink)
         self.assertEqual(99, self.pub.stock["Whiskey"])
 
-    # def test_sell_drink__okay(self):
-    #     self.pub.sell_drink(self.customer, self.drink)
-    #     self.assertEqual(True, self.pub.check_customer_age(self.customer.age))
-    #     self.assertEqual(False, self.pub.is_customer_too_drunk(self.customer))
-    #     self.assertEqual(90, self.customer.wallet)
-    #     self.pub.till = 100
-    #     self.pub.increase_till(self.drink.price)
-    #     self.assertEqual(110, self.pub.till)
+    def test_reduce_stock__no_stock(self):
+        self.pub.reduce_stock(self.drink_not_found)
+        self.assertEqual(0, self.pub.stock["Pan_Galactic_Gargle_Blaster"])
+  
+
+    def test_sell_drink__okay(self):
+        self.pub.till = 100
+        self.assertEqual(100, self.pub.till)
+        self.pub.sell_drink(self.customer, self.drink)
+        self.assertEqual(True, self.pub.check_customer_age(self.customer.age))
+        self.assertEqual(False, self.pub.is_customer_too_drunk(self.customer))
+        self.assertEqual(90, self.customer.wallet)
+        self.assertEqual(110, self.pub.till)
+
+    def test_sell_drink__too_young(self):
+        self.pub.till = 100
+        self.pub.sell_drink(self.customer_young, self.drink)
+        self.assertEqual(False, self.pub.check_customer_age(self.customer_young.age))
+        self.assertEqual(100, self.customer_young.wallet)
+        self.assertEqual(100, self.pub.till)
