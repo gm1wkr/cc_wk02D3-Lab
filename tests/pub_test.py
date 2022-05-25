@@ -40,3 +40,18 @@ class TestPub(unittest.TestCase):
         self.assertEqual(False, old_enough)
 
 # Extensions
+    def test_pub_has_stock_dict(self):
+        self.assertEqual(isinstance(self.pub.stock, dict), True)
+
+    def test_reduce_stock(self):
+        self.pub.reduce_stock(self.drink)
+        self.assertEqual(99, self.pub.stock["Whiskey"])
+
+    # def test_sell_drink__okay(self):
+    #     self.pub.sell_drink(self.customer, self.drink)
+    #     self.assertEqual(True, self.pub.check_customer_age(self.customer.age))
+    #     self.assertEqual(False, self.pub.is_customer_too_drunk(self.customer))
+    #     self.assertEqual(90, self.customer.wallet)
+    #     self.pub.till = 100
+    #     self.pub.increase_till(self.drink.price)
+    #     self.assertEqual(110, self.pub.till)
