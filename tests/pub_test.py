@@ -44,6 +44,9 @@ class TestPub(unittest.TestCase):
     def test_pub_has_stock_dict(self):
         self.assertEqual(isinstance(self.pub.stock, dict), True)
 
+    def test_pub_has_price_dict(self):
+        self.assertEqual(isinstance(self.pub.drink_price, dict), True)
+    
     def test_is_in_stock__true(self):
         self.assertEqual(True, self.pub.is_in_stock(self.drink))
 
@@ -77,3 +80,6 @@ class TestPub(unittest.TestCase):
         self.assertEqual(False, self.pub.check_customer_age(self.customer_young.age))
         self.assertEqual(100, self.customer_young.wallet)
         self.assertEqual(100, self.pub.till)
+
+    def test_get_total_stock_value(self):
+        self.assertEqual(3650, self.pub.get_total_stock_value())
