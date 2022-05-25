@@ -7,3 +7,7 @@ class Customer:
 
     def decrease_wallet(self, amount):
         self.wallet -= amount
+
+    def increase_drunk_level(self, unit):
+        self.drunk_level += unit
+    # def buy_drink
