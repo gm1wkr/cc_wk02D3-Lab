@@ -32,6 +32,11 @@ class TestCustomer(unittest.TestCase):
         drunk_level = self.customer.increase_drunk_level(20)
         self.assertEqual(20, self.customer.drunk_level)
 
+    def test_decrease_drunk_level(self):
+        self.customer.increase_drunk_level(19)
+        self.customer.decrease_drunk_level(9)
+        self.assertEqual(10, self.customer.drunk_level)
+
     def test_increase_drunk_level__pass(self):
         drunk_level = self.customer.increase_drunk_level(self.drink.unit)
         self.assertEqual(12, self.customer.drunk_level)

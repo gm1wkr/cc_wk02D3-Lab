@@ -11,4 +11,6 @@ class Customer:
 
     def increase_drunk_level(self, unit):
         self.drunk_level += unit
-    # def buy_drink
+    
+    def decrease_drunk_level(self, amount):
+        self.drunk_level -= amount
